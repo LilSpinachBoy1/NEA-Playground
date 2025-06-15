@@ -1,4 +1,5 @@
 import sqlite3
+from fastapi import FastAPI
 
 # Set up db connection
 con = sqlite3.connect('fun_facts.db')
@@ -14,3 +15,13 @@ def run_query(query):
         print(f"An error occurred: {e}")
         return None
     
+
+# Create FastAPI app
+app = FastAPI()
+
+# Endpoint to provide info on the API and database functionality
+@app.get("/api/test")
+def test():
+    if run_query("SELECT * from facts;"): valid = True  # If the funtion returns something, the db is working
+    else: valid = False
+    return {"api": True, "db": valid}
