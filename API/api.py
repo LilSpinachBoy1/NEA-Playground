@@ -2,7 +2,7 @@ import sqlite3
 from fastapi import FastAPI
 
 # Set up db connection
-con = sqlite3.connect('fun_facts.db')
+con = sqlite3.connect('fun_facts.db', check_same_thread=False)
 cur = con.cursor()
 
 # function to run a query against the database
